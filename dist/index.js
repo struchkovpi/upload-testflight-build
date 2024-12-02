@@ -1248,6 +1248,7 @@ function uploadApp(appPath, appType, email, password, options) {
             '--output-format',
             'xml',
             '--upload-app',
+            '-f',
             appPath,
             '--type',
             appType,

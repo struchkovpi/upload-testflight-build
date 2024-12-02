@@ -24,6 +24,7 @@ export async function uploadApp(
     '--output-format',
     'xml',
     '--upload-app',
+    '-f',
     appPath,
     '--type',
     appType,
