@@ -1241,7 +1241,7 @@ const exec = __importStar(__webpack_require__(986));
  @param issuerId The issuer identifier of the API key.
  @param options (Optional) Command execution options.
  */
-function uploadApp(appPath, appType, apiKeyId, issuerId, options) {
+function uploadApp(appPath, appType, email, password, options) {
     return __awaiter(this, void 0, void 0, function* () {
         const args = [
             'altool',
@@ -1251,10 +1251,10 @@ function uploadApp(appPath, appType, apiKeyId, issuerId, options) {
             appPath,
             '--type',
             appType,
-            '--apiKey',
-            apiKeyId,
-            '--apiIssuer',
-            issuerId
+            '-u',
+            email,
+            '-p',
+            password
         ];
         yield exec.exec('xcrun', args, options);
     });
@@ -1739,11 +1739,13 @@ function run() {
             if (os.platform() !== 'darwin') {
                 throw new Error('Action requires macOS agent.');
             }
-            const issuerId = core.getInput('issuer-id');
-            const apiKeyId = core.getInput('api-key-id');
-            const apiPrivateKey = core.getInput('api-private-key');
+            //const issuerId: string = core.getInput('issuer-id')
+            //const apiKeyId: string = core.getInput('api-key-id')
+            //const apiPrivateKey: string = core.getInput('api-private-key')
             const appPath = core.getInput('app-path');
             const appType = core.getInput('app-type');
+            const email = core.getInput('testflight-email');
+            const password = core.getInput('testflight-password');
             let output = '';
             const options = {};
             options.listeners = {
@@ -1751,9 +1753,9 @@ function run() {
                     output += data.toString();
                 }
             };
-            yield altool.installPrivateKey(apiKeyId, apiPrivateKey);
-            yield altool.uploadApp(appPath, appType, apiKeyId, issuerId, options);
-            yield altool.deleteAllPrivateKeys();
+            //await altool.installPrivateKey(apiKeyId, apiPrivateKey)
+            yield altool.uploadApp(appPath, appType, email, password, options);
+            //await altool.deleteAllPrivateKeys()
             core.setOutput('altool-response', output);
         }
         catch (error) {

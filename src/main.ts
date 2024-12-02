@@ -10,12 +10,13 @@ async function run(): Promise<void> {
       throw new Error('Action requires macOS agent.')
     }
 
-    const issuerId: string = core.getInput('issuer-id')
-    const apiKeyId: string = core.getInput('api-key-id')
-    const apiPrivateKey: string = core.getInput('api-private-key')
+    //const issuerId: string = core.getInput('issuer-id')
+    //const apiKeyId: string = core.getInput('api-key-id')
+    //const apiPrivateKey: string = core.getInput('api-private-key')
     const appPath: string = core.getInput('app-path')
     const appType: string = core.getInput('app-type')
-
+    const email: string = core.getInput('testflight-email')
+    const password: string = core.getInput('testflight-password')
     let output = ''
     const options: ExecOptions = {}
     options.listeners = {
@@ -24,9 +25,9 @@ async function run(): Promise<void> {
       }
     }
 
-    await altool.installPrivateKey(apiKeyId, apiPrivateKey)
-    await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
-    await altool.deleteAllPrivateKeys()
+    //await altool.installPrivateKey(apiKeyId, apiPrivateKey)
+    await altool.uploadApp(appPath, appType, email, password, options)
+    //await altool.deleteAllPrivateKeys()
 
     core.setOutput('altool-response', output)
   } catch (error) {

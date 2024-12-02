@@ -15,8 +15,8 @@ import {ExecOptions} from '@actions/exec/lib/interfaces'
 export async function uploadApp(
   appPath: string,
   appType: string,
-  apiKeyId: string,
-  issuerId: string,
+  email: string,
+  password: string,
   options?: ExecOptions
 ): Promise<void> {
   const args: string[] = [
@@ -27,10 +27,10 @@ export async function uploadApp(
     appPath,
     '--type',
     appType,
-    '--apiKey',
-    apiKeyId,
-    '--apiIssuer',
-    issuerId
+    '-u',
+    email,
+    '-p',
+    password
   ]
 
   await exec.exec('xcrun', args, options)
