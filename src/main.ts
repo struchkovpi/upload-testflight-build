@@ -11,7 +11,7 @@ async function run(): Promise<void> {
     }
 
     const issuerId: string = core.getInput('issuer-id')
-    const apiKeyId: string = atob(core.getInput('api-key-id'))
+    const apiKeyId: string = core.getInput('api-key-id')
     const apiPrivateKey: string = core.getInput('api-private-key')
     const appPath: string = core.getInput('app-path')
     const appType: string = core.getInput('app-type')
