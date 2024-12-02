@@ -11,12 +11,18 @@ inputs:
     default: 'ios'
   issuer-id:
     description: 'The AppStoreConnect API Key Issuer Identifier'
-    required: true
+    required: false
   api-key-id:
     description: 'The Key ID for AppStore Connect API'
-    required: true
+    required: false
   api-private-key:
     description: 'The PKCS8 format Private Key for AppStore Connect API'
+    required: false
+  testflight-email:
+    description: 'The AppstoreConnect Email addess'
+    required: true
+  testflight-password:
+    description: 'The AppstoreConnect password'
     required: true
 outputs:
   altool-response:
